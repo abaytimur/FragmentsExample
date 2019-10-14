@@ -24,14 +24,28 @@ import java.util.ArrayList;
 public class ListFrag extends ListFragment {
 
 
+    ItemSelected activity;
+
+
+    public interface ItemSelected           //listFrag ile DetailFrag'in iletisim halinde olabilmesi icin interface yarattik
+    {
+        void onItemSelected(int index);
+    }
+
     public ListFrag() {
         // Required empty public constructor
     }
 
 
+
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+
+        activity = (ItemSelected) context;
+
+
     }
 
     @Override
@@ -44,7 +58,7 @@ public class ListFrag extends ListFragment {
         data.add("3. This is item 3");
 
         setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, data)); //BU KISMI TAM ANLAMADIM
-
+        activity.onItemSelected(0);
 
 
     }
@@ -52,7 +66,7 @@ public class ListFrag extends ListFragment {
     @Override
     public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
 
-
+        activity.onItemSelected(position);
 
     }
 }

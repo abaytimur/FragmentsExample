@@ -7,10 +7,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ListFrag.ItemSelected {
 
 
     TextView tvDescription;
+    ArrayList<String> descriptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,10 +20,15 @@ public class MainActivity extends AppCompatActivity {
 
         tvDescription = findViewById(R.id.tvDescription);
 
-        ArrayList<String> descriptions = new ArrayList<>();
+        descriptions = new ArrayList<>();
         descriptions.add("Description for item 1");
         descriptions.add("Description for item 2");
         descriptions.add("Description for item 3");
 
+    }
+
+    @Override
+    public void onItemSelected(int index) {
+        tvDescription.setText(descriptions.get(index));
     }
 }
